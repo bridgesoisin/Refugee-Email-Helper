@@ -1,7 +1,7 @@
 # app.py
 import streamlit as st
 from langdetect import detect
-from googletrans import Translator
+from deep_translator import GoogleTranslator
 from openai import OpenAI
 
 st.set_page_config(page_title="Clear Email Helper – Ireland", layout="wide")
@@ -12,7 +12,11 @@ st.write("Compose professional, convincing emails in English with a preview in y
 # On Streamlit Cloud you'll add this in Settings → Secrets as OPENAI_API_KEY
 client = OpenAI(api_key=st.secrets.get("OPENAI_API_KEY", ""))
 
-translator = Translator()
+def translate_text(text, target="en"):
+    try:
+        return GoogleTranslator(source="auto", target=target).translate(text)
+    except Exception:
+        return text
 
 # --- Inputs ---
 st.subheader("1) Your inputs")
@@ -54,7 +58,7 @@ if st.button("✨ Generate Email"):
 
             # If not English, translate to English
             if detected_lang and detected_lang not in ("en", "unknown"):
-                translated_native = translator.translate(native_input, dest="en").text
+                translated_native = translate_text(native_input, "en")
             else:
                 translated_native = native_input
 
@@ -99,9 +103,10 @@ DETAILS:
             st.stop()
 
         # 4) Back-translate the final email so user can preview in their own language
+        # 4) Back-translate the final email so user can preview in their own language
         if detected_lang and detected_lang not in ("en", "unknown"):
             try:
-                preview = translator.translate(final_email, dest=detected_lang).text
+                preview = translate_text(final_email, detected_lang)
             except Exception:
                 preview = "(Could not translate preview. Showing English.)\n\n" + final_email
         else:
