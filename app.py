@@ -23,7 +23,7 @@ def translate_text(text, target="en"):
         return text
 
 # --- Inputs ---
-st.subheader("1) Your inputs")
+st.subheader("1) Input your email in English or your Native Language")
 
 native_input = st.text_area(
     "Write in your native language (we will auto-detect & translate)", height=150, key="native_input"
