@@ -26,10 +26,10 @@ def translate_text(text, target="en"):
 st.subheader("1) Your inputs")
 
 native_input = st.text_area(
-    "Write in your native language (we will auto-detect & translate)", height=150, key="native_input"
+    "Write in your native language (we will auto-detect & translate)", height=180, key="native_input"
 )
 
-thread_text = st.text_area("Paste the previous email or thread (optional)", height=150, key="thread")
+thread_text = st.text_area("Paste the previous email or thread (optional)", height=180, key="thread")
 
 user_notes = st.text_area("Extra notes/keywords in English (optional)", height=100, key="notes")
 
