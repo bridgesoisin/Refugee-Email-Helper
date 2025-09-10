@@ -10,7 +10,10 @@ st.write("Compose professional emails in English.")
 
 # --- OpenAI client (reads your key from Streamlit Secrets) ---
 # On Streamlit Cloud you'll add this in Settings → Secrets as OPENAI_API_KEY
-client = OpenAI(api_key=st.secrets.get("OPENAI_API_KEY", ""))
+client = OpenAI(
+    api_key=st.secrets["GROQ_API_KEY"],
+    base_url="https://api.groq.com/openai/v1"
+)
 
 def translate_text(text, target="en"):
     try:
@@ -90,13 +93,14 @@ DETAILS:
         # 3) Call OpenAI to create the professional English email
         try:
             resp = client.chat.completions.create(
-                model="gpt-4o-mini",
+                model="llama-3.1-70b-versatile",  # Faster Groq model "llama-3.1-8b-instant"
                 messages=[
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": user_prompt},
                 ],
                 temperature=0.5,
             )
+
             final_email = resp.choices[0].message.content.strip()
         except Exception as e:
             st.error(f"OpenAI error: {e}")
