@@ -5,7 +5,7 @@ from deep_translator import GoogleTranslator
 from openai import OpenAI
 
 st.set_page_config(page_title="Clear Email Helper – Ireland", layout="wide")
-st.title("📧 Clear Email Helper – Ireland")
+st.title("📧 Email Helper – Ireland")
 st.write("Compose professional emails in English.")
 
 # --- OpenAI client (reads your key from Streamlit Secrets) ---
@@ -26,12 +26,12 @@ def translate_text(text, target="en"):
 st.subheader("1) Your inputs")
 
 native_input = st.text_area(
-    "Write in your native language (we will auto-detect & translate)", height=300, key="native_input"
+    "Write in your native language (we will auto-detect & translate)", height=150, key="native_input"
 )
 
-thread_text = st.text_area("Paste the previous email or thread (optional)", height=300, key="thread")
+thread_text = st.text_area("Paste the previous email or thread (optional)", height=150, key="thread")
 
-user_notes = st.text_area("Extra notes/keywords in English (optional)", height=800, key="notes")
+user_notes = st.text_area("Extra notes/keywords in English (optional)", height=150, key="notes")
 
 # --- Tone selection ---
 tone_choice = st.selectbox(
