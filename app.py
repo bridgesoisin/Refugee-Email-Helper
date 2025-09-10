@@ -39,7 +39,6 @@ tone_choice = st.selectbox(
     [
         "Professional",
         "Friendly",
-        "Short",
         "Formal (official/government)",
         "Urgent",
         "Apologetic",
@@ -52,7 +51,6 @@ tone_choice = st.selectbox(
 tone_prompts = {
     "Professional": "Write in a clear, neutral, and respectful style. Suitable for work, landlords, or services. Use simple but professional language.",
     "Friendly": "Write in a warm, kind, and polite way. Use soft and welcoming words. Good for schools, neighbours, or friendly situations.",
-    "Short": "Write a short and simple email with only the most important information. Keep it direct, 2–4 sentences.",
     "Formal (official/government)": "Write in very formal language, as used in letters to government, council, or immigration offices. Avoid contractions (use 'do not' instead of 'don’t'). Be precise and serious.",
     "Urgent": "Write in a polite but strong way. Emphasise that the matter is urgent and needs fast attention. Keep sentences clear and easy to understand.",
     "Apologetic": "Write in a polite way that says sorry and explains the reason. Show understanding, responsibility, and willingness to correct or improve.",
