@@ -10,6 +10,7 @@ st.write("Compose professional emails in English.")
 
 # --- OpenAI client (reads your key from Streamlit Secrets) ---
 # On Streamlit Cloud you'll add this in Settings → Secrets as OPENAI_API_KEY
+
 client = OpenAI(
     api_key=st.secrets["GROQ_API_KEY"],
     base_url="https://api.groq.com/openai/v1"
@@ -45,7 +46,7 @@ details = st.text_input("Details to reference (e.g., address, reference number, 
 st.markdown("---")
 
 if st.button("✨ Generate Email"):
-    if not st.secrets.get("OPENAI_API_KEY"):
+    if not st.secrets.get("GROQ_API_KEY"):
         st.error("Missing OPENAI_API_KEY. Add it in your Streamlit app Settings → Secrets.")
         st.stop()
 
