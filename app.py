@@ -33,13 +33,32 @@ thread_text = st.text_area("Paste the previous email or thread (optional)", heig
 
 user_notes = st.text_area("Extra notes/keywords in English (optional)", height=100, key="notes")
 
-tone = st.selectbox(
-    "Choose tone",
+# --- Tone selection ---
+tone_choice = st.selectbox(
+    "Choose the tone of your email",
     [
-        "Neutral professional", "Polite & warm", "Clear & firm",
-        "Very formal", "Concise", "Apologetic & solution-oriented", "Gratitude & follow-up"
+        "Professional",
+        "Friendly",
+        "Short",
+        "Formal (official/government)",
+        "Urgent",
+        "Apologetic",
+        "Complaint",
+        "Thank you"
     ],
 )
+
+# Expanded tone instructions for the AI
+tone_prompts = {
+    "Professional": "Write in a clear, neutral, and respectful style. Suitable for work, landlords, or services. Use simple but professional language.",
+    "Friendly": "Write in a warm, kind, and polite way. Use soft and welcoming words. Good for schools, neighbours, or friendly situations.",
+    "Short": "Write a short and simple email with only the most important information. Keep it direct, 2–4 sentences.",
+    "Formal (official/government)": "Write in very formal language, as used in letters to government, council, or immigration offices. Avoid contractions (use 'do not' instead of 'don’t'). Be precise and serious.",
+    "Urgent": "Write in a polite but strong way. Emphasise that the matter is urgent and needs fast attention. Keep sentences clear and easy to understand.",
+    "Apologetic": "Write in a polite way that says sorry and explains the reason. Show understanding, responsibility, and willingness to correct or improve.",
+    "Complaint": "Write in a polite but serious way. Explain the problem clearly. Show that you expect action, but avoid aggressive or rude words. Focus on the facts and the solution.",
+    "Thank you": "Write in a positive way that shows gratitude and appreciation. Keep the message polite and warm. Can also be used to follow up kindly."
+}
 
 details = st.text_input("Details to reference (e.g., address, reference number, dates)", "")
 
@@ -69,14 +88,16 @@ if st.button("✨ Generate Email"):
         # 2) Build prompts for the email draft
         system_prompt = f"""
 You write professional emails for recipients in Ireland.
-Tone: {tone}.
+Tone selected by user: {tone_choice}.
+Expanded tone guidance: {tone_prompts[tone_choice]}.
 Rules:
-- Clear, polite English (CEFR B1–B2).
-- Short sentences.
+- Use clear, polite English (CEFR B1–B2).
+- Sentences should be clear but not overly short; aim for natural flow.
 - Include only facts from THREAD, USER NOTES, or TRANSLATED NATIVE INPUT.
-- Structure: Greeting, opening (cite thread if any), body, clear ask with date, courteous closing, signature.
+- Structure: Greeting, opening (acknowledge previous message if provided), body (explain issue/request), closing (thank or polite ending), signature.
+- Do NOT automatically add a deadline unless the user specifically requested one.
+- Expand politely so the email feels complete and professional (2–4 short paragraphs).
 """
-
         user_prompt = f"""
 THREAD:
 {thread_text}
