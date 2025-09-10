@@ -35,7 +35,7 @@ user_notes = st.text_area("Extra notes in ENGLISH (optional)", height=150, key="
 
 # --- Tone selection ---
 tone_choice = st.selectbox(
-    "Choose the tone of your email",
+    "Choose the TONE of your email",
     [
         "Professional",
         "Friendly",
