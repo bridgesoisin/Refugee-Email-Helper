@@ -94,7 +94,7 @@ DETAILS:
         # 3) Call OpenAI to create the professional English email
         try:
             resp = client.chat.completions.create(
-                model="llama-3.2-90b-preview",  # Faster Groq model "llama-3.1-8b-instant"
+                model="llama-3.1-8b-instant",  # Faster Groq model "llama-3.1-8b-instant"
                 messages=[
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": user_prompt},
