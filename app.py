@@ -6,7 +6,7 @@ from openai import OpenAI
 
 st.set_page_config(page_title="Clear Email Helper – Ireland", layout="wide")
 st.title("📧 Clear Email Helper – Ireland")
-st.write("Compose professional, convincing emails in English with a preview in your own language.")
+st.write("Compose professional emails in English.")
 
 # --- OpenAI client (reads your key from Streamlit Secrets) ---
 # On Streamlit Cloud you'll add this in Settings → Secrets as OPENAI_API_KEY
