@@ -42,7 +42,7 @@ native_input = st.text_area(
     "Write in your NATIVE language (auto-detect language and translate)", height=150, key="native_input"
 )
 
-thread_text = st.text_area("Paste PREVIOUS EMAILS (optional)", height=150, key="thread")
+thread_text = st.text_area("Paste PREVIOUSLY RECEIVED EMAILS (optional)", height=150, key="thread")
 
 user_notes = st.text_area("Extra notes in ENGLISH (optional)", height=150, key="notes")
 
