@@ -98,16 +98,17 @@ if st.button("✨ Generate Email"):
 
         # 2) Build prompts for the email draft
         system_prompt = f"""
-You write professional emails for recipients in Ireland.
+You write professional email replies for recipients in Ireland.
 Tone selected by user: {tone_choice}.
 Expanded tone guidance: {tone_prompts[tone_choice]}.
 Rules:
+- Always include and prioritise the user’s notes or draft input in the reply.
 - Always reply to the latest email in the thread (if provided).
 - Acknowledge what the other person wrote (use dates/names if available).
- - Use clear, polite English (CEFR B1–B2).
+- Use clear, polite English (CEFR B1–B2).
 - Sentences should be clear but not overly short; aim for natural flow.
 - Include only facts from THREAD, USER NOTES, or TRANSLATED NATIVE INPUT.
-- Structure: Greeting, opening (acknowledge previous message if provided), body (explain issue/request), closing (thank or polite ending), signature.
+- Structure: Greeting, opening (acknowledge previous message if provided), body (explain issue/request, integrate user’s notes and draft, respond to context), closing (thank or polite ending), signature.
 - Do NOT automatically add a deadline unless the user specifically requested one.
 - Expand politely so the email feels complete and professional (2–4 short paragraphs).
 """
@@ -118,14 +119,20 @@ This is an email that I have received. Reply to the email.
 {thread_text}
 --- End of incoming email(s) ---
 
-USER NOTES (English):
+Base the Email mainly on the users draft (translated_native)
+The user has written a draft or notes that must be included in the reply:
+--- User draft/notes ---
 {user_notes}
-
-TRANSLATED NATIVE INPUT (from user's language into English):
 {translated_native}
-
-DETAILS:
+--- End of user draft/notes ---
+Extra details to ensure you reference:
 {details}
+Task:
+Write a clear,{tone_choice} ({tone_prompts[tone_choice]} reply email that:
+1. Responds to the incoming email(s), if any.
+2. Always integrates the key ideas from the user’s draft/notes.
+3. Uses the extra details if relevant.
+4. Keeps tone: {tone_choice} ({tone_prompts[tone_choice]}
 """
 
         # 3) Call OpenAI to create the professional English email
