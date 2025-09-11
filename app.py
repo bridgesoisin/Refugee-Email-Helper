@@ -122,7 +122,7 @@ The user has written a draft or notes that must be included in the reply:
 Extra details to ensure you reference:
 {details}
 
-Make reference to this email that I am replying to 
+Make reference to: 
 --- Incoming email(s) ---
 {thread_text}
 --- End of incoming email(s) ---
