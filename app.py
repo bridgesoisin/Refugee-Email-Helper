@@ -98,7 +98,7 @@ if st.button("✨ Generate Email"):
 
         # 2) Build prompts for the email draft
         system_prompt = f"""
-You write professional email replies for recipients in Ireland.
+You write professional emails for recipients in Ireland.
 Tone selected by user: {tone_choice}.
 Expanded tone guidance: {tone_prompts[tone_choice]}.
 Rules:
@@ -113,13 +113,14 @@ Rules:
 - Expand politely so the email feels complete and professional (2–4 short paragraphs).
 """
         user_prompt = f"""
-You are replying to the following email thread (if applicable):
-This is an email that I have received. Reply to the email.
+You are helping people compose an email.
+
+In this section I will paste previous emails I have received. 
+You are replying to the following email thread (if applicable so if it is blank then skip this part. ):
 --- Incoming email(s) ---
 {thread_text}
 --- End of incoming email(s) ---
-
-Base the Email mainly on the users draft (translated_native)
+Base the Email mainly on the users draft below (translated_native)
 The user has written a draft or notes that must be included in the reply:
 --- User draft/notes ---
 {user_notes}
