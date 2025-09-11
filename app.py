@@ -102,7 +102,7 @@ You write professional emails for recipients in Ireland.
 Tone selected by user: {tone_choice}.
 Expanded tone guidance: {tone_prompts[tone_choice]}.
 Rules:
-- Always include and prioritise the user’s notes or draft input in the reply.
+- Always include and prioritise the user’s notes or draft input in the email.
 - Always reply to the latest email in the thread (if provided).
 - Acknowledge what the other person wrote (use dates/names if available).
 - Use clear, polite English (CEFR B1–B2).
@@ -114,20 +114,21 @@ Rules:
 """
         user_prompt = f"""
 You are helping people compose an email.
-
-In this section I will paste previous emails I have received. 
-You are replying to the following email thread (if applicable so if it is blank then skip this part. ):
---- Incoming email(s) ---
-{thread_text}
---- End of incoming email(s) ---
 Base the Email mainly on the users draft below (translated_native)
 The user has written a draft or notes that must be included in the reply:
 --- User draft/notes ---
 {user_notes}
 {translated_native}
 --- End of user draft/notes ---
+
 Extra details to ensure you reference:
 {details}
+
+Make reference to this email that I am replying to 
+--- Incoming email(s) ---
+{thread_text}
+--- End of incoming email(s) ---
+
 Task:
 Write a clear,{tone_choice} ({tone_prompts[tone_choice]} reply email that:
 1. Responds to the incoming email(s), if any.
