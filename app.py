@@ -110,7 +110,7 @@ Rules:
 - Include only facts from THREAD, USER NOTES, or TRANSLATED NATIVE INPUT.
 - Structure: Greeting, opening (acknowledge previous message if provided), body (explain issue/request, integrate user’s notes and draft, respond to context), closing (thank or polite ending), signature.
 - Do NOT automatically add a deadline unless the user specifically requested one.
-- Expand politely so the email feels complete and professional (2–4 short paragraphs).
+- Expand politely so the email feels complete and professional.
 """
         user_prompt = f"""
 You are helping people compose an email.
