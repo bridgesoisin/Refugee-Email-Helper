@@ -3,6 +3,7 @@ import streamlit as st
 from langdetect import detect
 from deep_translator import GoogleTranslator
 from openai import OpenAI
+import json  # add at the top of your file
 
 st.set_page_config(page_title="Clear Email Helper – Ireland", layout="wide")
 st.title("📧 Email Helper – Ireland")
@@ -138,7 +139,28 @@ DETAILS:
 
         # 5) Display results
         st.subheader("2) Copy and send this Email")
-        st.markdown(f"> {final_email.replace('\n', '\n> ')}")
+        
+        # Nicely wrapped text
+        st.text_area("Generated Email", final_email, height=300)
+        
+        # Escape the email safely for JS
+        safe_email = json.dumps(final_email)  # turns it into a safe JS string
+        
+        # Custom copy-to-clipboard button (bulletproof)
+        copy_button = f"""
+            <button onclick="navigator.clipboard.writeText({safe_email})"
+                    style="margin-top:10px;
+                           padding:8px 16px;
+                           border:none;
+                           border-radius:6px;
+                           background-color:#4CAF50;
+                           color:white;
+                           cursor:pointer;">
+                📋 Copy to Clipboard
+            </button>
+        """
+        
+        st.markdown(copy_button, unsafe_allow_html=True)
 
 
 
