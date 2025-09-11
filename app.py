@@ -139,6 +139,13 @@ DETAILS:
 
         # 5) Display results
         st.subheader("2) Copy and send this Email")
+        # Show nicely with wrapping + plain text + built-in copy button
+        st.code(final_email, language="text")
+
+
+
+
+
         # Make code blocks wrap lines (no sideways scrolling) but keep the copy button
         st.markdown(
             """
@@ -154,7 +161,6 @@ DETAILS:
         )
         
         # Now you get wrapping + the native copy button:
-        st.subheader("2) Copy and send this Email")
         st.code(final_email)  # copy icon appears in the top-right, lines wrap
 
 
