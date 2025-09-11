@@ -98,13 +98,11 @@ if st.button("✨ Generate Email"):
 
         # 2) Build prompts for the email draft
         system_prompt = f"""
-You write professional emails for recipients in Ireland.
+You write professional emails for recipients in Ireland based on drafts.
 Tone selected by user: {tone_choice}.
 Expanded tone guidance: {tone_prompts[tone_choice]}.
 Rules:
 - Always include and prioritise the user’s notes or draft input in the email.
-- Always reply to the latest email in the thread (if provided).
-- Acknowledge what the other person wrote (use dates/names if available).
 - Use clear, polite English (CEFR B1–B2).
 - Sentences should be clear but not overly short; aim for natural flow.
 - Include only facts from THREAD, USER NOTES, or TRANSLATED NATIVE INPUT.
