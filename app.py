@@ -97,6 +97,7 @@ if st.button("✨ Generate Email"):
                 translated_native = native_input
 
         # 2) Build prompts for the email draft
+        has_thread = bool(thread_text.strip())
         system_prompt = f"""
 You write professional emails in Ireland based on drafts.
 Tone selected by user: {tone_choice}.
@@ -110,6 +111,87 @@ Rules:
 - Do NOT automatically add a deadline unless the user specifically requested one.
 - Expand politely so the email feels complete and professional.
 """
+        
+if has_thread:
+    system_prompt = f"""
+You write professional email replies for recipients in Ireland.
+Tone selected by user: {tone_choice}.
+Expanded tone guidance: {tone_prompts[tone_choice]}.
+
+Rules:
+- This is a REPLY to an incoming email.
+- Always include and prioritise the user’s notes or draft input in the reply.
+- Acknowledge what the sender wrote (use dates/names if available).
+- Use clear, polite English (CEFR B1–B2).
+- Structure: Subject, Greeting, short reference to the previous email, body (integrating user’s notes), closing, signature.
+- Do NOT add a deadline unless the user specifically requested it.
+- Write 2–4 short paragraphs.
+"""
+
+    user_prompt = f"""
+You are replying to the following email thread:
+
+--- Incoming email(s) ---
+{thread_text}
+--- End of incoming email(s) ---
+
+The user has written a draft or notes that MUST be included in the reply:
+
+--- User draft/notes ---
+{user_notes}
+{translated_native}
+--- End of user draft/notes ---
+
+Extra details to reference:
+{details}
+
+Task:
+Write a clear and polite REPLY email that:
+1) Responds to the incoming email(s).
+2) Always integrates the user’s draft/notes.
+3) References extra details if relevant.
+4) Keeps tone: {tone_choice} ({tone_prompts[tone_choice]}).
+Return ONLY the final email (Subject + body).
+"""
+else:
+    system_prompt = f"""
+You write professional outbound emails for recipients in Ireland.
+Tone selected by user: {tone_choice}.
+Expanded tone guidance: {tone_prompts[tone_choice]}.
+
+Rules:
+- There is NO incoming email. Compose a NEW email from scratch.
+- Use the user’s notes/draft as the main content.
+- Do NOT include phrases like "thank you for your email" since no reply is needed.
+- Use clear, polite English (CEFR B1–B2).
+- Structure: Subject, Greeting, body (integrating user’s notes), closing, signature.
+- Do NOT add a deadline unless the user specifically requested it.
+- Write 2–4 short paragraphs.
+"""
+
+    user_prompt = f"""
+The user has written a draft or notes that MUST be included in a NEW email:
+
+--- User draft/notes ---
+{user_notes}
+{translated_native}
+--- End of user draft/notes ---
+
+Extra details to reference:
+{details}
+
+Task:
+Write a clear and polite NEW email that:
+1) Uses the user’s draft/notes as the main content.
+2) References extra details if relevant.
+3) Keeps tone: {tone_choice} ({tone_prompts[tone_choice]}).
+Return ONLY the final email (Subject + body).
+"""
+
+
+
+
+        
         user_prompt = f"""
 You are helping people compose an email.
 improve the users draft below (translated_native)
