@@ -41,11 +41,6 @@ st.subheader("1) Input your email in English or your Native Language")
 native_input = st.text_area(
     "Write in your NATIVE language (auto-detect language and translate)", height=150, key="native_input"
 )
-
-thread_text = st.text_area("Paste PREVIOUSLY RECEIVED EMAILS (optional)", height=150, key="thread")
-
-user_notes = st.text_area("Extra notes in ENGLISH (optional)", height=150, key="notes")
-
 # --- Tone selection ---
 tone_choice = st.selectbox(
     "Choose the TONE of your email",
@@ -70,8 +65,6 @@ tone_prompts = {
     "Complaint": "Write in a polite but serious way. Explain the problem clearly. Show that you expect action, but avoid aggressive or rude words. Focus on the facts and the solution.",
     "Thank you": "Write in a positive way that shows gratitude and appreciation. Keep the message polite and warm. Can also be used to follow up kindly."
 }
-
-details = st.text_input("Details to reference (e.g., address, reference number, dates)", "")
 
 st.markdown("---")
 
@@ -114,18 +107,8 @@ Rules:
 You are only composing an email.
 improve the users email draft below (translated_native):
 --- User draft/notes ---
-{user_notes}
 {translated_native}
 --- End of user draft/notes ---
-
-Extra details to ensure you reference in the email:
-{details}
-
-Make reference in the email: 
---- Incoming email(s) ---
-{thread_text}
---- End of incoming email(s) ---
-
 """
 
         # 3) Call OpenAI to create the professional English email
