@@ -139,35 +139,23 @@ DETAILS:
 
         # 5) Display results
         st.subheader("2) Copy and send this Email")
+        # Make code blocks wrap lines (no sideways scrolling) but keep the copy button
+        st.markdown(
+            """
+            <style>
+              /* Wrap all code/pre blocks rendered by st.code */
+              pre, code {
+                white-space: pre-wrap !important;
+                word-break: break-word !important;
+              }
+            </style>
+            """,
+            unsafe_allow_html=True
+        )
         
-        # Nicely wrapped text
-        st.text_area("Generated Email", final_email, height=300)
-        
-        # Escape the email safely for JS
-        safe_email = json.dumps(final_email)  # ensures quotes/newlines are safe
-        
-        # Custom copy-to-clipboard button
-        copy_button = f"""
-            <script>
-                function copyEmail() {{
-                    navigator.clipboard.writeText({safe_email});
-                    alert("Email copied to clipboard!");
-                }}
-            </script>
-            <button onclick="copyEmail()"
-                    style="margin-top:10px;
-                           padding:8px 16px;
-                           border:none;
-                           border-radius:6px;
-                           background-color:#4CAF50;
-                           color:white;
-                           cursor:pointer;">
-                📋 Copy to Clipboard
-            </button>
-        """
-        
-        st.markdown(copy_button, unsafe_allow_html=True)
-
+        # Now you get wrapping + the native copy button:
+        st.subheader("2) Copy and send this Email")
+        st.code(final_email)  # copy icon appears in the top-right, lines wrap
 
 
 
