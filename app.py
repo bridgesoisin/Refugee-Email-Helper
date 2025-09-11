@@ -137,8 +137,9 @@ DETAILS:
             preview = final_email
 
         # 5) Display results
-        st.subheader("2) Professional Email (English – this is what you’ll send)")
-        st.text_area("Generated Email (English – this is what you’ll send):", final_email, height=300)
+        st.subheader("2) Copy and send this Email")
+        st.markdown(f"> {final_email.replace('\n', '\n> ')}")
+
 
 
         st.subheader("3) Preview in your language (read to confirm meaning)")
