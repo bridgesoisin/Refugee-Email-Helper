@@ -144,23 +144,30 @@ DETAILS:
         st.text_area("Generated Email", final_email, height=300)
         
         # Escape the email safely for JS
-        safe_email = json.dumps(final_email)  # turns it into a safe JS string
-        
-        # Custom copy-to-clipboard button (bulletproof)
-        copy_button = f"""
-            <button onclick="navigator.clipboard.writeText({safe_email})"
-                    style="margin-top:10px;
-                           padding:8px 16px;
-                           border:none;
-                           border-radius:6px;
-                           background-color:#4CAF50;
-                           color:white;
-                           cursor:pointer;">
-                📋 Copy to Clipboard
-            </button>
-        """
-        
-        st.markdown(copy_button, unsafe_allow_html=True)
+safe_email = json.dumps(final_email)  # ensures quotes/newlines are safe
+
+# Custom copy-to-clipboard button
+copy_button = f"""
+    <script>
+        function copyEmail() {{
+            navigator.clipboard.writeText({safe_email});
+            alert("Email copied to clipboard!");
+        }}
+    </script>
+    <button onclick="copyEmail()"
+            style="margin-top:10px;
+                   padding:8px 16px;
+                   border:none;
+                   border-radius:6px;
+                   background-color:#4CAF50;
+                   color:white;
+                   cursor:pointer;">
+        📋 Copy to Clipboard
+    </button>
+"""
+
+st.markdown(copy_button, unsafe_allow_html=True)
+
 
 
 
