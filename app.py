@@ -108,16 +108,18 @@ Rules:
 - Include facts from THREAD, USER NOTES, or TRANSLATED NATIVE INPUT.
 - Structure: Greeting, opening (acknowledge previous message if provided), body (explain issue/request, integrate user’s notes and draft, respond to context), closing (thank or polite ending), signature.
 - Do NOT automatically add a deadline unless the user specifically requested one.
-- Expand politely so the email feels complete and professional.
+- Email feels complete and professional.
 """
         user_prompt = f"""
-You are helping people compose an email.
+Write a clear,{tone_choice} ({tone_prompts[tone_choice]} email
 improve the users draft below (translated_native)
-The user has written a draft or notes that must be included in the reply:
+The user has written a draft or notes that must be included:
 --- User draft/notes ---
 {user_notes}
 {translated_native}
 --- End of user draft/notes ---
+
+Task:
 
 Extra details to ensure you reference:
 {details}
@@ -127,8 +129,6 @@ Make reference to:
 {thread_text}
 --- End of incoming email(s) ---
 
-Task:
-Write a clear,{tone_choice} ({tone_prompts[tone_choice]} email
 """
 
         # 3) Call OpenAI to create the professional English email
