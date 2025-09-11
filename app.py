@@ -98,21 +98,21 @@ if st.button("✨ Generate Email"):
 
         # 2) Build prompts for the email draft
         system_prompt = f"""
-You write professional emails for recipients in Ireland based on drafts.
+You write professional emails in Ireland based on drafts.
 Tone selected by user: {tone_choice}.
 Expanded tone guidance: {tone_prompts[tone_choice]}.
 Rules:
-- Always include and prioritise the user’s notes or draft input in the email.
+- Always include and prioritise composing the email based on notes or draft input in the email.
 - Use clear, polite English (CEFR B1–B2).
 - Sentences should be clear but not overly short; aim for natural flow.
-- Include only facts from THREAD, USER NOTES, or TRANSLATED NATIVE INPUT.
+- Include facts from THREAD, USER NOTES, or TRANSLATED NATIVE INPUT.
 - Structure: Greeting, opening (acknowledge previous message if provided), body (explain issue/request, integrate user’s notes and draft, respond to context), closing (thank or polite ending), signature.
 - Do NOT automatically add a deadline unless the user specifically requested one.
 - Expand politely so the email feels complete and professional.
 """
         user_prompt = f"""
 You are helping people compose an email.
-Base the Email mainly on the users draft below (translated_native)
+improve the users draft below (translated_native)
 The user has written a draft or notes that must be included in the reply:
 --- User draft/notes ---
 {user_notes}
@@ -128,11 +128,7 @@ Make reference to:
 --- End of incoming email(s) ---
 
 Task:
-Write a clear,{tone_choice} ({tone_prompts[tone_choice]} reply email that:
-1. Responds to the incoming email(s), if any.
-2. Always integrates the key ideas from the user’s draft/notes.
-3. Uses the extra details if relevant.
-4. Keeps tone: {tone_choice} ({tone_prompts[tone_choice]}
+Write a clear,{tone_choice} ({tone_prompts[tone_choice]} email
 """
 
         # 3) Call OpenAI to create the professional English email
