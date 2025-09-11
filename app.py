@@ -108,18 +108,16 @@ Rules:
 - Include facts from THREAD, USER NOTES, or TRANSLATED NATIVE INPUT.
 - Structure: Greeting, opening (acknowledge previous message if provided), body (explain issue/request, integrate user’s notes and draft, respond to context), closing (thank or polite ending), signature.
 - Do NOT automatically add a deadline unless the user specifically requested one.
-- Email feels complete and professional.
+- Expand politely so the email feels complete and professional.
 """
         user_prompt = f"""
-Write a clear,{tone_choice} ({tone_prompts[tone_choice]} email
+You are helping people compose an email.
 improve the users draft below (translated_native)
-The user has written a draft or notes that must be included:
+The user has written a draft or notes that must be included in the email:
 --- User draft/notes ---
 {user_notes}
 {translated_native}
 --- End of user draft/notes ---
-
-Task:
 
 Extra details to ensure you reference:
 {details}
