@@ -113,7 +113,7 @@ Rules:
 """
         user_prompt = f"""
 You are replying to the following email thread (if applicable):
-
+This is an email that I have received. Reply to the email.
 --- Incoming email(s) ---
 {thread_text}
 --- End of incoming email(s) ---
