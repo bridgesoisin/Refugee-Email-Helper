@@ -6,6 +6,18 @@ from openai import OpenAI
 import json  # add at the top of your file
 
 st.set_page_config(page_title="Clear Email Helper – Ireland", layout="wide")
+st.markdown(
+    """
+    <style>
+    pre, code {
+        white-space: pre-wrap !important;
+        word-wrap: break-word !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 st.title("📧 Email Helper – Ireland")
 st.write("Compose professional emails in English.")
 
@@ -133,7 +145,6 @@ DETAILS:
             st.stop()
 
         # 4) Back-translate the final email so user can preview in their own language
-        # 4) Back-translate the final email so user can preview in their own language
         if detected_lang and detected_lang not in ("en", "unknown"):
             try:
                 preview = translate_text(final_email, detected_lang)
@@ -146,6 +157,7 @@ DETAILS:
         st.subheader("2) Copy and send this Email")
         # Show nicely with wrapping + plain text + built-in copy button
         st.code(final_email, language="text")
+        
         st.subheader("3) Preview in your language (read to confirm meaning)")
         st.write(preview)
 
