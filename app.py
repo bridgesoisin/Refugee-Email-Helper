@@ -90,7 +90,9 @@ You write professional emails for recipients in Ireland.
 Tone selected by user: {tone_choice}.
 Expanded tone guidance: {tone_prompts[tone_choice]}.
 Rules:
-- Use clear, polite English (CEFR B1–B2).
+- Always reply to the latest email in the thread (if provided).
+- Acknowledge what the other person wrote (use dates/names if available).
+ - Use clear, polite English (CEFR B1–B2).
 - Sentences should be clear but not overly short; aim for natural flow.
 - Include only facts from THREAD, USER NOTES, or TRANSLATED NATIVE INPUT.
 - Structure: Greeting, opening (acknowledge previous message if provided), body (explain issue/request), closing (thank or polite ending), signature.
@@ -98,8 +100,11 @@ Rules:
 - Expand politely so the email feels complete and professional (2–4 short paragraphs).
 """
         user_prompt = f"""
-THREAD:
+You are replying to the following email thread (if applicable):
+
+--- Incoming email(s) ---
 {thread_text}
+--- End of incoming email(s) ---
 
 USER NOTES (English):
 {user_notes}
@@ -141,30 +146,6 @@ DETAILS:
         st.subheader("2) Copy and send this Email")
         # Show nicely with wrapping + plain text + built-in copy button
         st.code(final_email, language="text")
-
-
-
-
-
-        # Make code blocks wrap lines (no sideways scrolling) but keep the copy button
-        st.markdown(
-            """
-            <style>
-              /* Wrap all code/pre blocks rendered by st.code */
-              pre, code {
-                white-space: pre-wrap !important;
-                word-break: break-word !important;
-              }
-            </style>
-            """,
-            unsafe_allow_html=True
-        )
-        
-        # Now you get wrapping + the native copy button:
-        st.code(final_email)  # copy icon appears in the top-right, lines wrap
-
-
-
         st.subheader("3) Preview in your language (read to confirm meaning)")
         st.write(preview)
 
