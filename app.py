@@ -138,7 +138,8 @@ DETAILS:
 
         # 5) Display results
         st.subheader("2) Professional Email (English – this is what you’ll send)")
-        st.code(final_email, language="markdown")
+        st.text_area("Generated Email (English – this is what you’ll send):", final_email, height=300)
+
 
         st.subheader("3) Preview in your language (read to confirm meaning)")
         st.write(preview)
