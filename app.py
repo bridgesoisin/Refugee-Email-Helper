@@ -146,3 +146,4 @@ improve the users email draft below (translated_native):
 
         st.download_button("📥 Download email as .txt", final_email, file_name="email.txt")
         st.success("Review the preview carefully before sending or copying.")
+        
